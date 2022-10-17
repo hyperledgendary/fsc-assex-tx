@@ -1,20 +1,10 @@
-module hyperledgendary/smart-asset-tx/v2
+module github.com/hyperledgendary/smart-asset-tx
 
 go 1.18
 
 require (
-	github.com/hyperledger-labs/fabric-smart-client v0.0.0-20221012101638-99ad0567d3af
+	github.com/hyperledger-labs/fabric-smart-client v0.0.0-20221014133551-b982a2ebb03c
 	github.com/pkg/errors v0.9.1
-)
-
-// needs to be at this version until smart-client moves up to use 2.4 fabric
-// so every go-kit use is at least 0.9.0
-replace (
-	github.com/fsouza/go-dockerclient => github.com/fsouza/go-dockerclient v1.4.1
-	github.com/go-kit/kit => github.com/go-kit/kit v0.7.0
-	github.com/hyperledger/fabric => github.com/hyperledger/fabric v1.4.0-rc1.0.20210722174351-9815a7a8f0f7
-	github.com/hyperledger/fabric-protos-go => github.com/hyperledger/fabric-protos-go v0.0.0-20201028172056-a3136dde2354
-	go.etcd.io/etcd => go.etcd.io/etcd v0.5.0-alpha.5.0.20181228115726-23731bf9ba55
 )
 
 require (
@@ -220,4 +210,14 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 	lukechampine.com/blake3 v1.1.6 // indirect
+)
+
+// needs to be at this version until smart-client moves up to use 2.4 fabric
+// so every go-kit use is at least 0.9.0
+replace (
+	github.com/fsouza/go-dockerclient => github.com/fsouza/go-dockerclient v1.4.1
+	github.com/go-kit/kit => github.com/go-kit/kit v0.7.0
+	github.com/hyperledger/fabric => github.com/hyperledger/fabric v1.4.0-rc1.0.20210722174351-9815a7a8f0f7
+	github.com/hyperledger/fabric-protos-go => github.com/hyperledger/fabric-protos-go v0.0.0-20201028172056-a3136dde2354
+	go.etcd.io/etcd => go.etcd.io/etcd v0.5.0-alpha.5.0.20181228115726-23731bf9ba55
 )

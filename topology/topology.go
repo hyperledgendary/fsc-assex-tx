@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package topology
 
 import (
-	"hyperledgendary/smart-asset-tx/v2/views"
+	"github.com/hyperledgendary/smart-asset-tx/views"
 
 	"github.com/hyperledger-labs/fabric-smart-client/integration/nwo/api"
 	"github.com/hyperledger-labs/fabric-smart-client/integration/nwo/fabric"
@@ -23,11 +23,15 @@ func Topology() []api.Topology {
 	fabricTopology.AddOrganizationsByName("Org1", "Org2", "Org3")
 	// Deploy a dummy chaincode to setup the namespace
 	fabricTopology.SetNamespaceApproverOrgs("Org1")
+	fabricTopology.EnableGRPCLogging()
+	fabricTopology.EnableLogPeersToFile()
+	fabricTopology.EnableLogOrderersToFile()
+
 	fabricTopology.AddNamespaceWithUnanimity("asset_transfer", "Org1").SetStateChaincode()
 
 	// Create an empty FSC topology
 	fscTopology := fsc.NewTopology()
-
+	fscTopology.SetLogging("debug", "")
 	// Approver
 	approver := fscTopology.AddNodeByName("approver")
 	approver.AddOptions(fabric.WithOrganization("Org1"))

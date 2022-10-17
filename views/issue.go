@@ -8,8 +8,10 @@ package views
 
 import (
 	"encoding/json"
+	"fmt"
 
-	"github.com/hyperledger-labs/fabric-smart-client/integration/fabric/atsa/fsc/states"
+	"github.com/hyperledgendary/smart-asset-tx/states"
+
 	"github.com/hyperledger-labs/fabric-smart-client/platform/fabric"
 	"github.com/hyperledger-labs/fabric-smart-client/platform/fabric/services/state"
 	"github.com/hyperledger-labs/fabric-smart-client/platform/view/services/assert"
@@ -30,6 +32,8 @@ type IssueView struct {
 }
 
 func (f *IssueView) Call(context view.Context) (interface{}, error) {
+
+	fmt.Println("[IssueView] >>")
 	// As a first step operation, the issuer contacts the recipient's FSC node
 	// to request the identity to use to assign ownership of the freshly created asset.
 	assetOwner, err := state.RequestRecipientIdentity(context, f.Recipient)
@@ -69,6 +73,7 @@ func (f *IssueView) Call(context view.Context) (interface{}, error) {
 type IssueViewFactory struct{}
 
 func (p *IssueViewFactory) NewView(in []byte) (view.View, error) {
+	fmt.Println("[IssueView::new] >>")
 	f := &IssueView{Issue: &Issue{}}
 	err := json.Unmarshal(in, f.Issue)
 	assert.NoError(err, "failed unmarshalling input")

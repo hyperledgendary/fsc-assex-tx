@@ -9,8 +9,12 @@ _default:
 
 # Build the code and pull down the idemix tool
 build:
+    #!/bin/bash
+    set -e -x -o pipefail
     go mod tidy
     go build -o bin/dev dev.go
+    # go build -o bin/client client/client.go
+
     go get github.com/IBM/idemix/tools/idemixgen@v0.0.0-20220113150823-80dd4cb2d74e
 
 # Generate the configuration based on the topology.go
