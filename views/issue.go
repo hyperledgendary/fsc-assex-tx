@@ -40,6 +40,7 @@ func (f *IssueView) Call(context view.Context) (interface{}, error) {
 	assert.NoError(err, "failed getting recipient identity")
 
 	// The issuer creates a new transaction
+	// tx, err := state.NewAnonymousTransaction(context)
 	tx, err := state.NewTransaction(context)
 	assert.NoError(err, "failed creating transaction")
 

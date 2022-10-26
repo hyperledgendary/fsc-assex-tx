@@ -23,7 +23,6 @@ func Topology() []api.Topology {
 	fabricTopology.AddOrganizationsByName("Org1", "Org2", "Org3")
 	// Deploy a dummy chaincode to setup the namespace
 	fabricTopology.SetNamespaceApproverOrgs("Org1")
-	fabricTopology.EnableGRPCLogging()
 	fabricTopology.EnableLogPeersToFile()
 	fabricTopology.EnableLogOrderersToFile()
 
@@ -32,6 +31,8 @@ func Topology() []api.Topology {
 	// Create an empty FSC topology
 	fscTopology := fsc.NewTopology()
 	fscTopology.SetLogging("debug", "")
+	fscTopology.EnableLogToFile()
+
 	// Approver
 	approver := fscTopology.AddNodeByName("approver")
 	approver.AddOptions(fabric.WithOrganization("Org1"))
@@ -42,7 +43,7 @@ func Topology() []api.Topology {
 
 	// Issuer
 	issuer := fscTopology.AddNodeByName("issuer")
-	issuer.AddOptions(fabric.WithOrganization("Org3"))
+	issuer.AddOptions(fabric.WithOrganization("Org3"), fabric.WithAnonymousIdentity())
 	issuer.RegisterViewFactory("issue", &views.IssueViewFactory{})
 
 	// Alice

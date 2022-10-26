@@ -13,8 +13,7 @@ build:
     set -e -x -o pipefail
     go mod tidy
     go build -o bin/dev dev.go
-    # go build -o bin/client client/client.go
-
+    go build -o bin/client clientmain/clientmain.go
     go get github.com/IBM/idemix/tools/idemixgen@v0.0.0-20220113150823-80dd4cb2d74e
 
 # Generate the configuration based on the topology.go
@@ -33,8 +32,9 @@ gen:
     ./bin/dev network generate -p _cfg
 
 # Start the topology as defined in topology.go
-go:
+go: 
     #!/bin/bash
     set -e -x -o pipefail
-    export FAB_BINS=/home/matthew/github.com/hyperledger/fabric/build/bin
+    # export FAB_BINS=/home/matthew/github.com/hyperledger/fabric/build/bin
+    export FAB_BINS=/home/matthew/.local/fabric246/bin
     ./bin/dev network start -p _cfg
